@@ -13,20 +13,12 @@ public enum Option<A> {
 }
 
 extension Option {
-    public func flatten<B>() -> Option<B> where A == Option<B> {
+    public func flatMap<B>(transform: (A) -> Option<B>) -> Option<B> {
         switch self {
         case .none:
             return .none
         case .some(let opt):
-            return opt
+            return transform(opt)
         }
     }
 }
-
-extension Option {
-    public func flatMap<B>(transform: (A) -> Option<B>) -> Option<B> {
-        return map(transform).flatten()
-    }
-}
-
-
