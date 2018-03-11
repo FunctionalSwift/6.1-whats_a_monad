@@ -24,8 +24,9 @@ extension Option {
 }
 
 extension Option {
-    public func mapFlat<B>(transform: (A) -> Option<B>) -> Option<B> {
+    public func flatMap<B>(transform: (A) -> Option<B>) -> Option<B> {
         return map(transform).flatten()
     }
 }
+
 
