@@ -4,10 +4,9 @@ public enum Option<A> {
     case none
     case some(A)
     
-    public func map<B>(_ f: (A) -> B) -> Option<B> {
-        switch self {
-        case .none: return .none
-        case let .some(a): return .some(f(a))
+    public func map<B>(_ transform: (A) -> B) -> Option<B> {
+        return self.flatMap {
+            .some(transform($0))
         }
     }
 }
