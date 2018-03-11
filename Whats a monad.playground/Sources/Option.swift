@@ -11,3 +11,14 @@ public enum Option<A> {
         }
     }
 }
+
+extension Option {
+    public func flatten<B>() -> Option<B> where A == Option<B> {
+        switch self {
+        case .none:
+            return .none
+        case .some(let opt):
+            return opt
+        }
+    }
+}
